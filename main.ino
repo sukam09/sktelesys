@@ -1,10 +1,14 @@
 #include <DHT.h>
-//가스누출 센서
-
 #include <SPI.h>
 #include <Ethernet.h>
+//#include <DS1302.h>
 
-DHT dht(0, DHT22);
+/*#define CLK 13
+#define DAT 12
+#define RST 11*/
+
+//DHT dht(0, DHT22);
+//DS1302 rtc(RST, DAT, CLK);
 
 //Web Server
 byte mac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
@@ -12,35 +16,45 @@ EthernetServer server(80);
 
 void setup(){
   Serial.begin(9600);
-  dht.begin();
+  //dht.begin();
+  /*rtc.halt(false);
+  rtc.writeProtect(false);
+  rtc.setDOW(THURSDAY);
+  rtc.setTime(9, 21, 17);
+  rtc.setDate(26, 7, 2018);*/
   while(!Serial){
     
   }
-
+/*
   //이더넷 포트를 열고 서버를 시작합니다.
   Ethernet.begin(mac);
   server.begin();
   Serial.print("server is at ");
   //공유기로부터 할당받은 IP를 시리얼 통신으로 알려줍니다.
   Serial.println(Ethernet.localIP());
+*/
 }
 
 void loop(){
   //임시(LM35 센서를 대신 사용)
   int sensorVal=analogRead(0);
   float voltage=sensorVal*5.0/1024.0;
-  float temperature=voltage/0.01;
-  
-  float humidity=dht.readHumidity();
-  float oxygen; //산소 포화도
-
-  //가스 누출 및 온습도 이상
+  float temperature=voltage/0.01;  
+  //float humidity=dht.readHumidity();
 
   //for debugging
+  /*Serial.print("Date: ");
+  Serial.print(rtc.getDateStr());
+  Serial.print(" ");
+  Serial.print(rtc.getDOWStr());
+  Serial.print(" ");
+  Serial.print("Time: ");
+  Serial.print(rtc.getTimeStr());
+  Serial.print(" ");*/
   Serial.print("Temperature: ");
   Serial.print(temperature);
   Serial.println("˚C");
-
+/*
   //클라이언트가 접속할 때까지 대기합니다.
   EthernetClient client=server.available();
   if(client){
@@ -88,7 +102,7 @@ void loop(){
   client.stop();
   Serial.println("client disconnected");
   }
-
+*/
   //for debugging
   delay(1000);
 }
