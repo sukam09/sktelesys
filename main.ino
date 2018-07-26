@@ -25,22 +25,23 @@ void setup(){
   while(!Serial){
     
   }
-/*
-  //이더넷 포트를 열고 서버를 시작합니다.
+  /*//이더넷 포트를 열고 서버를 시작합니다.
   Ethernet.begin(mac);
   server.begin();
   Serial.print("server is at ");
   //공유기로부터 할당받은 IP를 시리얼 통신으로 알려줍니다.
-  Serial.println(Ethernet.localIP());
-*/
+  Serial.println(Ethernet.localIP());*/
 }
 
 void loop(){
-  //임시(LM35 센서를 대신 사용)
+  /*float temperature=dht.readTemperature();
+  float humidity=dht.readHumidity();*/
+
+  //임시
   int sensorVal=analogRead(0);
   float voltage=sensorVal*5.0/1024.0;
-  float temperature=voltage/0.01;  
-  //float humidity=dht.readHumidity();
+  float temperature=voltage/0.01;
+  float humidity=0;
 
   //for debugging
   /*Serial.print("Date: ");
@@ -51,11 +52,11 @@ void loop(){
   Serial.print("Time: ");
   Serial.print(rtc.getTimeStr());
   Serial.print(" ");*/
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.println("˚C");
-/*
-  //클라이언트가 접속할 때까지 대기합니다.
+  
+  Serial.println(temperature);
+  Serial.println(humidity);
+
+  /*//클라이언트가 접속할 때까지 대기합니다.
   EthernetClient client=server.available();
   if(client){
     Serial.println("new client");
@@ -101,8 +102,8 @@ void loop(){
   //연결을 끊습니다.
   client.stop();
   Serial.println("client disconnected");
-  }
-*/
-  //for debugging
+  }*/
+
+  //임시. 나중에 1분으로 바꿀 예정.
   delay(1000);
 }
