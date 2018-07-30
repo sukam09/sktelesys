@@ -1,9 +1,8 @@
-var moment=require('moment');
-var io=require('socket.io').listen(8000);
-
 var SerialPort=require('serialport');
 	portName='COM5',
 	sp=new SerialPort(portName);
+
+var moment=require('moment');
 
 sp.on('open', function(){
 	sp.on('data', function(data){
