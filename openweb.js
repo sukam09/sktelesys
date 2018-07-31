@@ -2,12 +2,6 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 
-/*var options = {
-   host: 'localhost',
-   port: '80',
-   path: '/hello.html'  
-};*/
-
 var server = http.createServer(function(request,response){
   var parsedUrl = url.parse(request.url);
   var resource = parsedUrl.pathname;
