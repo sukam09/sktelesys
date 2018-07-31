@@ -8,9 +8,7 @@
 3. 사용자가 원하는 범위를 지정할 수 있게 하고 이를 벗어날 경우 사용자에게 범위를 벗어났음을 알리는 푸시 알림을 띄웁니다. 이 때, 사용자가 에어컨 가동을 원할 경우 에어컨을 가동하고 이를 나타내는 Action을 추가합니다.
 5. 웹 페이지에 로그인할 수 있는 계정을 두어 관리자 계정의 경우 직접 관여할 수 있도록, 일반 계정의 경우 조회만 가능하게끔 합니다.
 
-※ Repository 이름이 monitorsys로 변경되었습니다.
-
-modified 30 July 2018
+modified 31 July 2018
 by Lee Seung Won
 
 ⓒ 2018 SKKU SK Telesys Team All Rights Reserved.
