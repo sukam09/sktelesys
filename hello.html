@@ -2,25 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8"> 
-<!-- <meta http-equiv='refresh' content=1>
- -->
-
-<title>Sk-Hynix</title>
+<title>SK텔레시스</title>
 <script type="text/javascript">
 window.onload = function(){
-	document.getElementById("btnStart").onclick = function(){
-		setInterval(readFile, 3000);
+	setInterval(readFile, 1000);
 	}
-}
 
 function readFile(){
 	var file = document.getElementById("file").files[0];
-	//alert(file);
-	document.getElementById("fileName").textContent = file.name;
-	document.getElementById("fileSize").textContent = file.size;
 	var reader = new FileReader();
-	var encodeList = document.getElementById("encoding");
-	var encoding = encodeList.options[encodeList.selectedIndex].value;
+	var encoding = "utf-8";
 	reader.readAsText(file, encoding);
 	reader.onload = function(){
 		var display = document.getElementById("content");
@@ -35,47 +26,10 @@ function readFile(){
 </script>
 </head>
 <body>
-<h2>클라이언트 컴의 파일 읽기</h2>
-<input type="file"	id="file">
-<select id="encoding">
-	<option value="utf-8">DDDD</option>
-	<option value="euc-kr">DDDD</option>
-</select>
-<button id="btnStart">읽기</button>
+<h2>실시간 모니터링 시스템</h2>
+<input type="file" id="file">
 <br>
-<div>
-	<span id="fileName">파일이름</span>
-	<span id="fileSize">파일크기</span>
-</div>
-<textarea rows="10" cols="50" id="content" readonly="readonly"></textarea>
+<br>
+<textarea rows="30" cols="50" id="content" readonly="readonly"></textarea>
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!-- 
-<!DOCTYPE html> 
-<html> 
-<head>
-    <meta charset='UTF-8'/>
-    <meta http-equiv='refresh' content=1>
-    <title>SK Hynix</title>
-    <script type='text/javascript'>
-
-    </script>
-</head>
-<body>
-    <h1>실시간 모니터링 시스템</h1>  
-    <h2>현재 온도</h2> 
-
-
-   
-
-
-</body>
-</html> -->
