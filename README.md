@@ -11,4 +11,4 @@
 modified 1 August 2018
 by Lee Seung Won
 
-ⓒ 2018 SKKU SK Telesys Team All Rights Reserved.
+ⓒ 2018 SKKU SK elesys Team All Rights Reserved.
