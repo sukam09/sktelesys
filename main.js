@@ -13,14 +13,11 @@ sp.on('open', function(){
 
 		console.log(date+' '+Math.floor(temperature*10)/10+'˚C');
 		fs.appendFile('file01_async.txt', date+' '+Math.floor(temperature*10)/10+'˚C'+'\n','utf-8', function(e){
-	//     fs.writeFile('file01_async.txt',temperature+'\n','utf-8', function(e){
 			if(e) console.log(e);
 			else console.log('Write Finish!');
 		});
 
-
 	try{
-//		fs.writeFileSync('file02_sync.txt',temperature+'\n','utf-8');
 		fs.appendFileSync('file02_sync.txt', date+' '+Math.floor(temperature*10)/10+'˚C'+'\n','utf-8');
 		console.log('Write Fininshed!');
 	}catch(e){

@@ -6,10 +6,10 @@ var server = http.createServer(function(request,response){
   var parsedUrl = url.parse(request.url);
   var resource = parsedUrl.pathname;
 
-  // 1. 요청된 자원이 /hello 이면
-  if(resource == '/hello'){
-    // 2. hello.html 파일을 읽은 후
-    fs.readFile('hello.html', 'utf-8', function(error, data)
+  // 1. 요청된 자원이 /sktelesys 이면
+  if(resource == '/sktelesys'){
+    // 2. sktelesys.html 파일을 읽은 후
+    fs.readFile('sktelesys.html', 'utf-8', function(error, data)
     {
       // 2.1 읽으면서 오류가 발생하면 오류의 내용을
       if(error){
