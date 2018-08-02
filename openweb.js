@@ -27,18 +27,22 @@ var server = http.createServer(function(request,response){
   }
 });
 
-setInterval(ERRORchecker, 1000);
+server.listen(80, function(){
+  console.log('Server is running...');
+});
 
-function ERRORchecker(){
-  fs.readFile('file02_sync_RealTime.txt',"utf8", (err, warningdata) => {
-    if (err) throw err;
-    console.log(warningdata);
-    if(warningdata>25){
-      console.log("EREEEEEEE");
-    }
-  });
+// setInterval(ERRORchecker, 1000);
 
-  server.listen(80, function(){
-    console.log('Server is running...');
-  });
-}
+// function ERRORchecker(){
+//   fs.readFile('file02_sync_RealTime.txt',"utf8", (err, warningdata) => {
+//     if (err) throw err;
+//     console.log(warningdata);
+//     if(warningdata>25){
+//       console.log("EREEEEEEE");
+//     }
+//   });
+
+//   server.listen(80, function(){
+//     console.log('Server is running...');
+//   });
+// }

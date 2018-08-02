@@ -16,14 +16,14 @@ sp.on('open', function(){
 			if(e) console.log(e);
 			else console.log('Write Finish!');
 		});
-		fs.writeFile('file01_async_RealTime.txt',date+' '+Math.floor(temperature*10)/10+'˚C'+'\n','utf-8', function(e){
+		fs.writeFile('file01_async_RealTime.txt',Math.floor(temperature*10)/10, function(e){
 
 			if(e) console.log(e);
 			else console.log('Temperature is recording');
 		});
 
 		try{
-			fs.writeFileSync('file02_sync_RealTime.txt',date+' '+Math.floor(temperature*10)/10+'˚C'+'\n','utf-8');
+			fs.writeFileSync('file02_sync_RealTime.txt',Math.floor(temperature*10)/10,'utf-8');
 			fs.appendFileSync('file02_sync.txt', date+' '+Math.floor(temperature*10)/10+'˚C'+'\n','utf-8');
 			console.log('Write Fininshed!');
 		}

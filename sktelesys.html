@@ -6,9 +6,6 @@
 <script type="text/javascript">
 window.onload = function(){
 	setInterval(readFile, 1000);
-    document.getElementById("btnStart").onclick = function(){
- 		//버튼을 클릭하면 기준 온도가 설정됨
-    }
 }
 
 function readFile(){
@@ -27,15 +24,19 @@ function readFile(){
 	}
 }
 
+function setBoundary(){
+	var boundary=document.getElementById("boundary").value;
+	alert('기준 온도가 '+boundary+'˚C로 설정되었습니다.');
+}
 </script>
 </head>
 <body>
 <h2>실시간 모니터링 시스템</h2>
 <input type="file" id="file">
 <br>
+<br>
 <form>
-	<br>
-	기준 온도 <input type="text" name="boundary"> <button id="btnStart">확인</button>
+기준 온도 <input type="text" id="boundary"> <input type="button" value="확인" onclick="setBoundary()">
 </form>
 <br>
 <textarea rows="30" cols="50" id="content" readonly="readonly"></textarea>
