@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"> 
+<meta charset='UTF-8'> 
 <title>SK 텔레시스</title>
-<script type="text/javascript">
+<script type='text/javascript'>
 window.onload = function(){
 	setInterval(readFile, 1000);
 }
 
+var fs=require('fs');
+
 function readFile(){
-	var file = document.getElementById("file").files[0];
+	var file = document.getElementById('file').files[0];
 	var reader = new FileReader();
-	var encoding = "utf-8";
+	var encoding = 'utf-8';
 	reader.readAsText(file, encoding);
 	reader.onload = function(){
-		var display = document.getElementById("content");
+		var display = document.getElementById('content');
 		display.textContent = reader.result;		// 읽은 파일
 		display.scrollTop = display.scrollHeight;
+		getTemperature();
 	}	
 	reader.onerror = function(e){
-		alert("읽기 오류:" + e.target.error.code);
+		alert('읽기 오류:' + e.target.error.code);
 		return;
 	}
 }
 
-function setBoundary(){
-	var boundary=document.getElementById("boundary").value;
+function getBoundary(){
+	var boundary=document.getElementById('boundary').value;
 	alert('기준 온도가 '+boundary+'˚C로 설정되었습니다.');
+	return boundary;
+}
+
+function getTemperature(){
+	// fs.readFile('file02_sync_RealTime.txt', 'utf-8', function(error, data){
+	//  	if(error) throw error;
+	//  	else{
+	//  		var temperature=data;
+	//  		document.getElementById('temperature').innerHTML='현재 온도는 '+25+'˚C입니다.';
+	//  	}
+	var temperature=25; //임시
+	document.getElementById('temperature').innerHTML='현재 온도는 '+temperature+'˚C입니다.';
 }
 </script>
 </head>
 <body>
 <h2>실시간 모니터링 시스템</h2>
-<input type="file" id="file">
+<input type='file' id='file'>
 <br>
 <br>
-<form>
-기준 온도 <input type="text" id="boundary"> <input type="button" value="확인" onclick="setBoundary()">
-</form>
-<br>
-<textarea rows="30" cols="50" id="content" readonly="readonly"></textarea>
+기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
+<h3><p id='temperature'></p></h3>
+<textarea rows='30' cols='50' id='content' readonly='readonly'></textarea>
 </body>
 </html>
