@@ -38,6 +38,7 @@ function checkTemperature(){
 		boundary=Number(boundary);
 		document.getElementById('boundarycheck').innerHTML='기준 온도가 '+boundary+'˚C로 설정되었습니다.';
 		if(temperature>boundary){
+			document.getElementById('boundarycheck').innerHTML='';
 			document.getElementById('alert').innerHTML='기준 온도를 초과하였습니다.';
 		}
 		else{
@@ -83,7 +84,7 @@ function drawChart(){
 <br>
 기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
 <p id='boundarycheck'></p>
-<h3><font color='red'><p id='alert'></p></font></h3>
+<font color='red'><p id='alert'></p></font>
 <h3><p id='temperature'></p></h3>
 <div id='chart'></div>
 </body>
