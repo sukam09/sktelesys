@@ -2,16 +2,23 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<title>SK 텔레시스</title>
+<title>SK텔레시스</title>
 </head>
 <body>
-<script>
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<script type='text/javascript'>
+
 window.onload = function(){
 	setInterval(checkTemperature, 1000);
 }
 
+google.load('visualization', '1.1', {packages: ['line']});
+google.setOnLoadCallback(drawChart);
+
 var boundary;
 var setflag=false;
+var temparr=new Array();
+var datearr=new Array();
 
 function getRandomInt(max, min){
 	return Math.floor((Math.random()*(max-min) + min)*10)/10;
@@ -19,26 +26,58 @@ function getRandomInt(max, min){
 
 function checkTemperature(){
 	var temperature = getRandomInt(23,29);
-	if(setflag){
-		boundary=Number(boundary);
-		document.getElementById('boundarycheck').innerHTML='';
-		if(temperature>boundary){
-		document.getElementById('alert').innerHTML='기준 온도를 초과하였습니다.';
-		}
-		else{
-		document.getElementById('alert').innerHTML='';
-		}
-	}
-	else{
+	var date=new Date();
+
+	temparr.push(temperature);
+	datearr.push(date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+
+	if(!setflag){
 		document.getElementById('boundarycheck').innerHTML='기준 온도를 설정해주세요.';
 	}
-	document.getElementById('temperature').innerHTML='현재 온도는 '+temperature+'˚C입니다.';
+	else{
+		boundary=Number(boundary);
+		document.getElementById('boundarycheck').innerHTML='기준 온도가 '+boundary+'˚C로 설정되었습니다.';
+		if(temperature>boundary){
+			document.getElementById('alert').innerHTML='기준 온도를 초과하였습니다.';
+		}
+		else{
+			document.getElementById('alert').innerHTML='';
+		}
+	}
+	document.getElementById('temperature').innerHTML=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '
+	+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
+	drawChart();
 }
 
 function getBoundary(){
 	setflag=true;
 	boundary=document.getElementById('boundary').value;
+	document.getElementById('boundarycheck').innerHTML='기준 온도가 '+boundary+'˚C로 설정되었습니다.';
 }
+
+function drawChart(){
+	var data=new google.visualization.DataTable();
+	var len=temparr.length;
+
+	data.addColumn('string', '시간');
+	data.addColumn('number', '온도');
+
+	data.addRows([
+		[datearr[len-15], temparr[len-15]], [datearr[len-14], temparr[len-14]], [datearr[len-13], temparr[len-13]], [datearr[len-12], temparr[len-12]], [datearr[len-11], temparr[len-11]],
+		[datearr[len-10], temparr[len-10]], [datearr[len-9], temparr[len-9]], [datearr[len-8], temparr[len-8]], [datearr[len-7], temparr[len-7]], [datearr[len-6], temparr[len-6]],
+		[datearr[len-5], temparr[len-5]], [datearr[len-4], temparr[len-4]], [datearr[len-3], temparr[len-3]], [datearr[len-2], temparr[len-2]], [datearr[len-1], temparr[len-1]]
+	]);
+
+	var option={
+		width: 1000,
+		height: 400,
+		colors: ['orange']
+	};
+
+	var chart=new google.charts.Line(document.getElementById('chart'));
+	chart.draw(data, option);
+}
+
 </script>
 <h2>실시간 모니터링 시스템</h2>
 <br>
@@ -46,5 +85,6 @@ function getBoundary(){
 <p id='boundarycheck'></p>
 <h3><font color='red'><p id='alert'></p></font></h3>
 <h3><p id='temperature'></p></h3>
+<div id='chart'></div>
 </body>
 </html>
