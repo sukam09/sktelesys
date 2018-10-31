@@ -33,20 +33,26 @@ function checkTemperature(){
 
 	if(!setflag){
 		document.getElementById('boundarycheck').innerHTML='기준 온도를 설정해주세요.';
+		document.getElementById('temperature').innerHTML=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '
+		+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
 	}
 	else{
 		boundary=Number(boundary);
-		document.getElementById('boundarycheck').innerHTML='기준 온도가 '+boundary+'˚C로 설정되었습니다.';
 		if(temperature>boundary){
 			document.getElementById('boundarycheck').innerHTML='';
 			document.getElementById('alert').innerHTML='기준 온도를 초과하였습니다.';
+			document.getElementById('temperature').innerHTML='';
+			document.getElementById('anomaly').innerHTML=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '
+			+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
 		}
 		else{
+			document.getElementById('boundarycheck').innerHTML='기준 온도가 '+boundary+'˚C로 설정되었습니다.';
 			document.getElementById('alert').innerHTML='';
+			document.getElementById('temperature').innerHTML=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '
+			+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
+			document.getElementById('anomaly').innerHTML='';
 		}
 	}
-	document.getElementById('temperature').innerHTML=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '
-	+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
 	drawChart();
 }
 
@@ -86,6 +92,7 @@ function drawChart(){
 <p id='boundarycheck'></p>
 <font color='red'><p id='alert'></p></font>
 <h3><p id='temperature'></p></h3>
+<font color='red'><h3><p id='anomaly'></p></h3></font>
 <div id='chart'></div>
 </body>
 </html>
