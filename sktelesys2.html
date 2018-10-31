@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>SK 텔레시스</title>
+</head>
+<body>
+<script>
+window.onload = function(){
+	setInterval(checkTemperature, 1000);
+}
+
+var boundary;
+var setflag=false;
+
+function getRandomInt(max, min){
+	return Math.floor((Math.random()*(max-min) + min)*10)/10;
+}
+
+function checkTemperature(){
+	var temperature = getRandomInt(23,29);
+	if(setflag){
+		boundary=Number(boundary);
+		document.getElementById('boundarycheck').innerHTML='';
+		if(temperature>boundary){
+		document.getElementById('alert').innerHTML='기준 온도를 초과하였습니다.';
+		}
+		else{
+		document.getElementById('alert').innerHTML='';
+		}
+	}
+	else{
+		document.getElementById('boundarycheck').innerHTML='기준 온도를 설정해주세요.';
+	}
+	document.getElementById('temperature').innerHTML='현재 온도는 '+temperature+'˚C입니다.';
+}
+
+function getBoundary(){
+	setflag=true;
+	boundary=document.getElementById('boundary').value;
+}
+</script>
+<h2>실시간 모니터링 시스템</h2>
+<br>
+기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
+<p id='boundarycheck'></p>
+<h3><font color='red'><p id='alert'></p></font></h3>
+<h3><p id='temperature'></p></h3>
+</body>
+</html>

@@ -5,27 +5,52 @@
 <title>SK 텔레시스</title>
 <script type='text/javascript'>
 window.onload = function(){
-	setInterval(readFile, 1000);
+	// setInterval(readFile, 1000);
+	setInterval(checkTemperature, 1000);
 }
 
 var fs=require('fs');
+var temperature=Number(23);
+var incflag=true;
 
-function readFile(){
-	var file = document.getElementById('file').files[0];
-	var reader = new FileReader();
-	var encoding = 'utf-8';
-	reader.readAsText(file, encoding);
-	reader.onload = function(){
-		var display = document.getElementById('content');
-		display.textContent = reader.result;		// 읽은 파일
-		display.scrollTop = display.scrollHeight;
-		getTemperature();
-	}	
-	reader.onerror = function(e){
-		alert('읽기 오류:' + e.target.error.code);
-		return;
+function checkTemperature(){
+	if(incflag){
+        if(temperature==29){
+        	incflag=false;
+        	temperature--;
+        }
+        else{
+        	temperature++;
+        }
 	}
+	else{
+    	if(temperature==23){
+        	incflag=true;
+            temperature++;
+        }
+        else{
+        	temperature--;
+        }
+    }
+	document.getElementById('curtemp').innerHTML='현재 온도: '+temperature+'˚C';
 }
+
+// function readFile(){
+// 	var file = document.getElementById('file').files[0];
+// 	var reader = new FileReader();
+// 	var encoding = 'utf-8';
+// 	reader.readAsText(file, encoding);
+// 	reader.onload = function(){
+// 		var display = document.getElementById('content');
+// 		display.textContent = reader.result;		// 읽은 파일
+// 		display.scrollTop = display.scrollHeight;
+// 		getTemperature();
+// 	}	
+// 	reader.onerror = function(e){
+// 		alert('읽기 오류:' + e.target.error.code);
+// 		return;
+// 	}
+// }
 
 function getBoundary(){
 	var boundary=document.getElementById('boundary').value;
@@ -51,7 +76,7 @@ function getTemperature(){
 <br>
 <br>
 기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
-<h3><p id='temperature'></p></h3>
-<textarea rows='30' cols='50' id='content' readonly='readonly'></textarea>
+<h3><p id='curtemp'></p></h3>
+<!-- <textarea rows='30' cols='50' id='content' readonly='readonly'></textarea> -->
 </body>
 </html>
