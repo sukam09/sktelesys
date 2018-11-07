@@ -17,8 +17,10 @@ google.setOnLoadCallback(drawChart);
 
 var boundary;
 var setflag=false;
+var logflag=false;
 var temparr=new Array();
 var datearr=new Array();
+var logarr=new Array();
 
 function getRandomInt(max, min){
 	return Math.floor((Math.random()*(max-min) + min)*10)/10;
@@ -30,6 +32,22 @@ function checkTemperature(){
 
 	temparr.push(temperature);
 	datearr.push(date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+	logarr.push(date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C'+'<br>');
+
+	var log='';
+	var len=logarr.length;
+	for(var i=15;i>0;i--){
+		if(logarr[len-i]!=undefined){
+			log+=logarr[len-i];
+		}
+	}
+
+	if(!logflag){
+		document.getElementById('log').innerHTML='';
+	}
+	else{
+		document.getElementById('log').innerHTML=log;
+	}
 
 	if(!setflag){
 		document.getElementById('boundarycheck').innerHTML='기준 온도를 설정해주세요.';
@@ -52,7 +70,7 @@ function checkTemperature(){
 			+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+' '+temperature+'˚C';
 			document.getElementById('anomaly').innerHTML='';
 		}
-	}
+	}	
 	drawChart();
 }
 
@@ -86,16 +104,27 @@ function drawChart(){
 	chart.draw(data, option);
 }
 
+function getLog(){
+	if(!logflag){
+		logflag=true;
+	}
+	else{
+		logflag=false;
+	}
+}
+
 </script>
 <h1><font color='red'>SK </font><font color='orange'>telesys</font></h1>
 <h2>실시간 모니터링 시스템</h2>
-<input type='button' value='로그' onclick="location.href='http://localhost/log'"> <input type='button' value='보고서' onclick="location.href='http://localhost/report'">
+<input type='button' value='로그' onclick='getLog()'> <input type='button' value='보고서' onclick="location.href='http://localhost/report'">
 <br><br>
+<p id='log'></p>
 기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
 <p id='boundarycheck'></p>
 <font color='red'><p id='alert'></p></font>
 <h3><p id='temperature'></p></h3>
 <font color='red'><h3><p id='anomaly'></p></h3></font>
 <div id='chart'></div>
+<p id='log'></p>
 </body>
 </html>
