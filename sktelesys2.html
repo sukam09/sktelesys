@@ -68,17 +68,18 @@ function drawChart(){
 
 	data.addColumn('string', '시간');
 	data.addColumn('number', '온도');
+	data.addColumn('number', '기준 온도');
 
 	data.addRows([
-		[datearr[len-15], temparr[len-15]], [datearr[len-14], temparr[len-14]], [datearr[len-13], temparr[len-13]], [datearr[len-12], temparr[len-12]], [datearr[len-11], temparr[len-11]],
-		[datearr[len-10], temparr[len-10]], [datearr[len-9], temparr[len-9]], [datearr[len-8], temparr[len-8]], [datearr[len-7], temparr[len-7]], [datearr[len-6], temparr[len-6]],
-		[datearr[len-5], temparr[len-5]], [datearr[len-4], temparr[len-4]], [datearr[len-3], temparr[len-3]], [datearr[len-2], temparr[len-2]], [datearr[len-1], temparr[len-1]]
+		[datearr[len-15], temparr[len-15], boundary], [datearr[len-14], temparr[len-14], boundary], [datearr[len-13], temparr[len-13], boundary], [datearr[len-12], temparr[len-12], boundary], [datearr[len-11], temparr[len-11], boundary],
+		[datearr[len-10], temparr[len-10], boundary], [datearr[len-9], temparr[len-9], boundary], [datearr[len-8], temparr[len-8], boundary], [datearr[len-7], temparr[len-7], boundary], [datearr[len-6], temparr[len-6], boundary],
+		[datearr[len-5], temparr[len-5], boundary], [datearr[len-4], temparr[len-4], boundary], [datearr[len-3], temparr[len-3], boundary], [datearr[len-2], temparr[len-2], boundary], [datearr[len-1], temparr[len-1], boundary]
 	]);
 
 	var option={
 		width: 1000,
 		height: 400,
-		colors: ['orange']
+		//colors: ['orange']
 	};
 
 	var chart=new google.charts.Line(document.getElementById('chart'));
@@ -87,7 +88,8 @@ function drawChart(){
 
 </script>
 <h2>실시간 모니터링 시스템</h2>
-<br>
+<input type='button' value='로그' onclick="location.href='http://localhost/log'"> <input type='button' value='보고서' onclick="location.href='http://localhost/report'">
+<br><br>
 기준 온도 <input type='text' id='boundary'> <input type='button' value='확인' onclick='getBoundary()'>
 <p id='boundarycheck'></p>
 <font color='red'><p id='alert'></p></font>
