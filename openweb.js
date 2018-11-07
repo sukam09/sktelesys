@@ -22,6 +22,36 @@ var server = http.createServer(function(request,response){
       }
     });
   }
+  else if(resource == '/log'){
+    // 2. sktelesys.html 파일을 읽은 후
+    fs.readFile('log.html', 'utf-8', function(error, data)
+    {
+      // 2.1 읽으면서 오류가 발생하면 오류의 내용을
+      if(error){
+        response.writeHead(500, {'Content-Type':'text/html'});
+        response.end('500 Internal Server Error : '+error);
+      // 2.2 아무런 오류가 없이 정상적으로 읽기가 완료되면 파일의 내용을 클라이언트에 전달
+      }else{
+          response.writeHead(200, {'Content-Type':'text/html'});
+          response.end(data);
+      }
+    });
+  }  
+  else if(resource == '/report'){
+    // 2. sktelesys.html 파일을 읽은 후
+    fs.readFile('report.html', 'utf-8', function(error, data)
+    {
+      // 2.1 읽으면서 오류가 발생하면 오류의 내용을
+      if(error){
+        response.writeHead(500, {'Content-Type':'text/html'});
+        response.end('500 Internal Server Error : '+error);
+      // 2.2 아무런 오류가 없이 정상적으로 읽기가 완료되면 파일의 내용을 클라이언트에 전달
+      }else{
+          response.writeHead(200, {'Content-Type':'text/html'});
+          response.end(data);
+      }
+    });
+  }
   else{
     response.writeHead(404, {'Content-Type':'text/html'});
     response.end('404 Page Not Found');
@@ -29,5 +59,5 @@ var server = http.createServer(function(request,response){
 });
 
 server.listen(80, function(){
-  console.log('Server is running...');
+  console.log('Server is running…');
 });
